@@ -35,8 +35,7 @@ export default async function Users() {
   }
   const response = await getUsers(session!.user.token);
   if (response.code === 401) return redirect("/login");
-  if (response.code !== 200 && response.code !== 404) return <NotFound />;
-  const users = response.data.users;
+  const users = response.code === 200 ? response.data.users : [];
   return (
     <>
       <Dashboard>
@@ -60,8 +59,8 @@ export default async function Users() {
                 <CardDescription>Manajemen pengguna.</CardDescription>
               </CardHeader>
               <CardContent>
-                {response.code === 404 ? (
-                  <p className="text-sm font-semibold">{response.message}</p>
+                {users.length === 0 ? (
+                  <p className="text-sm font-semibold">Data pengguna tidak ada</p>
                 ) : (
                   <Table>
                     <TableHeader>

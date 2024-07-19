@@ -21,11 +21,9 @@ export const authOptions: NextAuthOptions = {
                     email: credentials.email,
                     password: credentials.password,
                 });
-                console.log({ responseLogin })
                 if (responseLogin.code !== 200) throw new Error(responseLogin.message)
                 const user = responseLogin.data
                 const responseAccount = await getMyProfile(user.token);
-                console.log({ responseAccount })
                 if (responseAccount.code !== 200) throw new Error(responseAccount.message)
                 const account = responseAccount.data
                 return { ...user, ...account };

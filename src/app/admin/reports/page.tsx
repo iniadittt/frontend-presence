@@ -29,8 +29,7 @@ export default async function Reports() {
   }
   const response = await getReports(session!.user.token);
   if (response.code === 401) return redirect("/login");
-  if (response.code !== 200 && response.code !== 404) return <NotFound />;
-  const reports = response.data.reports;
+  const reports = response.code === 200 ? response.data.reports : [];
   return (
     <>
       <Dashboard>
@@ -42,8 +41,10 @@ export default async function Reports() {
                 <CardDescription>Manajemen reports.</CardDescription>
               </CardHeader>
               <CardContent>
-                {response.code === 404 ? (
-                  <p className="text-sm font-semibold">{response.message}</p>
+                {reports.length === 0 ? (
+                  <p className="text-sm font-semibold">
+                    Data laporan tidak ada
+                  </p>
                 ) : (
                   <Table>
                     <TableHeader>

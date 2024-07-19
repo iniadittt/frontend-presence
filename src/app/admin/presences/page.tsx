@@ -8,7 +8,6 @@ import { Dashboard } from "@/components/client/dashboard";
 import { redirect } from "next/navigation";
 import { getPresences } from "@/lib/services/presence";
 import TabelPresence from "@/components/client/tabel-presence";
-import NotFound from "@/app/not-found";
 import Search from "@/components/ui/search";
 
 export default async function Pengguna({
@@ -24,8 +23,7 @@ export default async function Pengguna({
   }
   const response = await getPresences(session!.user.token);
   if (response.code === 401) return redirect("/login");
-  if (response.code !== 200 && response.code !== 404) return <NotFound />;
-  const presences = response.data.presences;
+  const presences = response.code === 200 ? response.data.presences : [];
   return (
     <>
       <Dashboard>
@@ -39,8 +37,10 @@ export default async function Pengguna({
                 <Search placeholder="Search user..." />
               </CardHeader>
               <CardContent>
-                {response.code === 404 ? (
-                  <p className="text-sm font-semibold">{response.message}</p>
+                {presences.length === 0 ? (
+                  <p className="text-sm font-semibold">
+                    Data presensi tidak ada
+                  </p>
                 ) : (
                   <Table>
                     <TableHeader>

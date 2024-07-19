@@ -26,29 +26,27 @@ export default function TabelPresence({
             <Badge variant="outline">{presence.status}</Badge>
           </TableCell>
           <TableCell className="font-medium">
-            {new Date(presence.time).toLocaleString("id-ID", {
-              timeZone: "Asia/Jakarta",
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-              hour12: false,
-            })}
+            {new Date(presence.time)
+              .toISOString()
+              .slice(0, 19)
+              .replace("T", " ")} (WIB)
           </TableCell>
           <TableCell className="hidden md:table-cell">
-            <Link href={presence.photo} target="_blank" className="underline">
-              {presence.photo}
+            <Link
+              href={presence.photo}
+              target="_blank"
+              className="underline text-blue-500"
+            >
+              Lihat foto
             </Link>
           </TableCell>
           <TableCell className="hidden md:table-cell">
             <Link
               href={`https://www.google.com/maps?q=${presence.lat},${presence.long}`}
-              className="underline"
+              className="underline text-blue-500"
               target="_blank"
             >
-              {presence.lat} - {presence.long}
+              Lihat lokasi
             </Link>
           </TableCell>
         </TableRow>
