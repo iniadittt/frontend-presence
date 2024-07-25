@@ -23,7 +23,7 @@ export const dataSidebar = [
     active: false,
   },
   {
-    title: "Laporan",
+    title: "Laporan Kritik",
     href: "/admin/reports",
     iconXl: () => <FileMinus className="h-4 w-4" />,
     icon: () => <FileMinus className="h-5 w-5" />,
