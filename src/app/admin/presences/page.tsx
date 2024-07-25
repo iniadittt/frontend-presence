@@ -54,6 +54,9 @@ export default async function Pengguna({
                         <TableHead className="hidden md:table-cell">
                           Location
                         </TableHead>
+                        <TableHead className="hidden md:table-cell">
+                          Note
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TabelPresence

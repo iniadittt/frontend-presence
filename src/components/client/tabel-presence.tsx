@@ -29,7 +29,8 @@ export default function TabelPresence({
             {new Date(presence.time)
               .toISOString()
               .slice(0, 19)
-              .replace("T", " ")} (WIB)
+              .replace("T", " ")}{" "}
+            (WIB)
           </TableCell>
           <TableCell className="hidden md:table-cell">
             <Link
@@ -49,6 +50,7 @@ export default function TabelPresence({
               Lihat lokasi
             </Link>
           </TableCell>
+          <TableCell className="font-medium">{presence.note ? presence.note : '-'}</TableCell>
         </TableRow>
       ))}
     </TableBody>
