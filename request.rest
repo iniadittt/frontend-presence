@@ -1,0 +1,11 @@
+
+
+###
+
+POST https://backend-presence-utw72yjvpa-uc.a.run.app/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "password"
+}
